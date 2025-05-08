@@ -1,0 +1,44 @@
+body {
+    font-family: monospace, sans-serif;
+    background-color:#000000;
+    margin: 0;
+    padding: 0;
+}
+
+.form{
+margin-top: 10px;
+max-width: 400px;
+margin: 0 auto;
+background-color: #000000;
+padding: 20px;
+border-radius: 16px;
+box-shadow: 0 0 100px rgba(253, 252, 252, 0.103);
+animation: shadowTransition 2s infinite alternate;
+}
+
+
+h1{
+    color: #ffffff;
+    text-align: center;
+    font-size: 4em;
+    margin-bottom: 20px;
+
+}
+
+
+p{
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}  
+@media (max-width: 450px) {
+    .form {
+        width: 75%;
+        margin-top: 20px;
+    }
+    h1 {
+
+        color: #5510c4;
+    }
+}
