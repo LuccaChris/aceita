@@ -84,7 +84,7 @@ button{
 /*----------------------------------------------------*/
 a{text-align: center;}
 
-.gp-btn {
+.gp-btn-2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
