@@ -25,6 +25,12 @@ h1{
     margin-bottom: 20px;
 
 }
+h2{
+    color: #ffffff;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
 
 
 p{
@@ -75,7 +81,7 @@ button{
     }
     h1 {
 
-        color: #5510c4;
+        color: #012006;
     }
     img{
         display: block;
