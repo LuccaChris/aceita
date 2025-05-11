@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/css/style.css">
-    <title>Escolha</title>
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/css/style.css">
+  <title>Escolha</title>
 </head>
 <body>
-    <div class="form">
-        <h1>Escolha</h1>
-        <p>Para onde você quer ir?</p>
-        <div class="gp-btn">
-           <div class="gp-btn-2">
-    <!-- Menu Cinema -->
-    <div class="dropdown">
-        <button class="btn btn-cine" onclick="toggleDropdown('dropdown-cinema')">🎬 Cinema ▾</button>
-        <div class="dropdown-content" id="dropdown-cinema">
-            <a href="https://wa.link/e6o6h9">⚡ Thunderbolts</a>
-            <a href="https://wa.link/am2gw7">🔮 Premonição 6: Laços De Sangue</a>
-            <a href="#">🕵️ Missão: Impossível - O Acerto Final</a>
-            <a href="#">🌑 Until Dawn: Noite De Terror</a>
-            <a href="#">🌺 Lilo & Stitch</a>
+  <div class="form">
+    <h1>Escolha</h1>
+    <p>Para onde você quer ir?</p>
+    
+    
+    <div class="gp-btn">
+        <div class="date-wrapper">
+            <input class="date-agenda" type="date" name="calendario" title="Escolha data" id="calendario" value="2025-05-11" min="2025-05-11" max="2025-12-31">
+            <span class="icon">📅</span>
         </div>
-    </div>
+      <div class="gp-btn-2">
 
-    <button class="btn btn-ibira">🌳 Ibirapuera</button>
+        <!-- Menu Cinema -->
+        <div class="dropdown">
+          <button class="btn btn-cine" data-target="dropdown-cinema">🎬 Cinema ▾</button>
+          <div class="dropdown-content" id="dropdown-cinema">
+            <a href="#" class="whatsapp-link" data-filme="Thunderbolts ⚡">⚡ Thunderbolts</a>
+            <a href="#" class="whatsapp-link" data-filme="Premonição 6: Laços De Sangue 🔮">🔮 Premonição 6: Laços De Sangue</a>
+            <a href="#" class="whatsapp-link" data-filme="Missão: Impossível - O Acerto Final 🕵️">🕵️ Missão: Impossível - O Acerto Final</a>
+            <a href="#" class="whatsapp-link" data-filme="Until Dawn: Noite De Terror 🌑">🌑 Until Dawn: Noite De Terror</a>
+            <a href="#" class="whatsapp-link" data-filme="Lilo & Stitch 🌺">🌺 Lilo & Stitch</a>
+          </div>
+        </div>
 
-    <!-- Menu Restaurante -->
-    <div class="dropdown">
-        <button class="btn btn-restaurante" onclick="toggleDropdown('dropdown-restaurante')">🍽️ Restaurante ▾</button>
-        <div class="dropdown-content" id="dropdown-restaurante">
-            <a href="#">🧹<br>Vassoura Quebrada</a>
-            <a href="#">🍔<br>Rec Burguer</a>
+        <!-- Ibirapuera -->
+        <button class="btn btn-ibira">
+          <a href="#" class="whatsapp-link" data-local="Parque Ibirapuera 🌳">🌳 Ibirapuera</a>
+        </button>
+
+        <!-- Menu Restaurante -->
+        <div class="dropdown">
+          <button class="btn btn-restaurante" data-target="dropdown-restaurante">🍽️ Restaurante ▾</button>
+          <div class="dropdown-content" id="dropdown-restaurante">
+            <a href="#" class="whatsapp-link" data-local="Vassoura Quebrada 🧹">🧹<br>Vassoura Quebrada</a>
+            <a href="#" class="whatsapp-link" data-local="Rec Burguer 🍔">🍔<br>Rec Burguer</a>
+          </div>
         </div>
+
+      </div>
     </div>
-</div>
-        </div>
-    </div>
+  </div>
+
 
  <script src="src/ts/script.js"></script>
 </body>

@@ -1,7 +1,5 @@
 const botaoNao = document.querySelector('.btn-n') as HTMLButtonElement;
-const botaoSim = document.querySelector('.btn-s') as HTMLButtonElement;
-
-botaoNao.addEventListener('mouseenter', () => {
+botaoNao?.addEventListener('mouseenter', () => {
     botaoNao.style.transition = 'none';
     botaoNao.style.position = 'absolute';
 
@@ -13,41 +11,73 @@ botaoNao.addEventListener('mouseenter', () => {
 
     botaoNao.style.left = `${randomX}px`;
     botaoNao.style.top = `${randomY}px`;
-}); 
+});
 
+// Mostra/esconde dropdowns personalizados
 function toggleDropdown(id: string): void {
-    const allMenus: NodeListOf<HTMLElement> = document.querySelectorAll('.dropdown-content');
-
-    allMenus.forEach((menu: HTMLElement) => {
-        if (menu.id === id) {
-            menu.classList.toggle('show');
-        } else {
-            menu.classList.remove('show'); // Fecha os outros
-        }
-    });
+  const allMenus = document.querySelectorAll('.dropdown-content');
+  allMenus.forEach((menu) => {
+    if ((menu as HTMLElement).id === id) {
+      menu.classList.toggle('show');
+    } else {
+      menu.classList.remove('show');
+    }
+  });
 }
 
+// Torna acessível globalmente caso use onclick no HTML
+(window as any).toggleDropdown = toggleDropdown;
 
-window.onclick = function (event: MouseEvent): void {
-    const target = event.target as HTMLElement;
+// Fecha dropdowns ao clicar fora
+window.addEventListener('click', (event: MouseEvent) => {
+  const target = event.target as HTMLElement;
 
-    if (!target.classList.contains('.btn-restaurante')) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i] as HTMLElement;
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-};
+  if (!target.closest('.dropdown')) {
+    const dropdowns = document.querySelectorAll(".dropdown-content");
+    dropdowns.forEach((drop) => drop.classList.remove('show'));
+  }
+});
 
+// Botão "Sim" leva para outra página
 document.addEventListener('DOMContentLoaded', () => {
-    const botao = document.getElementById('btn-s') as HTMLButtonElement;
+    const botaoSim = document.getElementById('btn-s') as HTMLButtonElement;
+    botaoSim?.addEventListener('click', () => {
+        window.location.href = 'choice.html';
+    });
 
-    if (botao) {
-        botao.addEventListener('click', () => {
-            window.location.href = 'choice.html';
+    // Integração com WhatsApp
+    const links = document.querySelectorAll('.whatsapp-link');
+    const inputData = document.getElementById('calendario') as HTMLInputElement;
+    const numero = '5511981242403'; 
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const filme = link.getAttribute('data-filme');
+            const local = link.getAttribute('data-local');
+            const dataSelecionada = inputData?.value || 'Data não selecionada';
+
+            let mensagem = 'Aceito: ✔️\n';
+
+            if (filme) {
+                mensagem += `Cineminha: 📽️\nFilminho: ${filme}\n`;
+            } else if (local) {
+                mensagem += `Local: ${local}\n`;
+            }
+
+            mensagem += `Data: ${dataSelecionada}`;
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
         });
-    }
+    });
+
+      const dropdownButtons = document.querySelectorAll<HTMLButtonElement>('.btn-cine, .btn-restaurante');
+  dropdownButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (targetId) toggleDropdown(targetId);
+    });
+  });
+
 });

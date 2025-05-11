@@ -1,6 +1,5 @@
 var botaoNao = document.querySelector('.btn-n');
-var botaoSim = document.querySelector('.btn-s');
-botaoNao.addEventListener('mouseenter', function () {
+botaoNao === null || botaoNao === void 0 ? void 0 : botaoNao.addEventListener('mouseenter', function () {
     botaoNao.style.transition = 'none';
     botaoNao.style.position = 'absolute';
     var maxX = window.innerWidth - botaoNao.offsetWidth;
@@ -10,6 +9,7 @@ botaoNao.addEventListener('mouseenter', function () {
     botaoNao.style.left = "".concat(randomX, "px");
     botaoNao.style.top = "".concat(randomY, "px");
 });
+// Mostra/esconde dropdowns personalizados
 function toggleDropdown(id) {
     var allMenus = document.querySelectorAll('.dropdown-content');
     allMenus.forEach(function (menu) {
@@ -17,27 +17,54 @@ function toggleDropdown(id) {
             menu.classList.toggle('show');
         }
         else {
-            menu.classList.remove('show'); // Fecha os outros
+            menu.classList.remove('show');
         }
     });
 }
-window.onclick = function (event) {
+// Torna acessível globalmente caso use onclick no HTML
+window.toggleDropdown = toggleDropdown;
+// Fecha dropdowns ao clicar fora
+window.addEventListener('click', function (event) {
     var target = event.target;
-    if (!target.classList.contains('.btn-restaurante')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
+    if (!target.closest('.dropdown')) {
+        var dropdowns = document.querySelectorAll(".dropdown-content");
+        dropdowns.forEach(function (drop) { return drop.classList.remove('show'); });
     }
-};
+});
+// Botão "Sim" leva para outra página
 document.addEventListener('DOMContentLoaded', function () {
-    var botao = document.getElementById('btn-s');
-    if (botao) {
-        botao.addEventListener('click', function () {
-            window.location.href = 'choice.html';
+    var botaoSim = document.getElementById('btn-s');
+    botaoSim === null || botaoSim === void 0 ? void 0 : botaoSim.addEventListener('click', function () {
+        window.location.href = 'choice.html';
+    });
+    // Integração com WhatsApp
+    var links = document.querySelectorAll('.whatsapp-link');
+    var inputData = document.getElementById('calendario');
+    var numero = '5511981242403';
+    links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            var filme = link.getAttribute('data-filme');
+            var local = link.getAttribute('data-local');
+            var dataSelecionada = (inputData === null || inputData === void 0 ? void 0 : inputData.value) || 'Data não selecionada';
+            var mensagem = 'Aceito: ✔️\n';
+            if (filme) {
+                mensagem += "Cineminha: \uD83D\uDCFD\uFE0F\nFilminho: ".concat(filme, "\n");
+            }
+            else if (local) {
+                mensagem += "Local: ".concat(local, "\n");
+            }
+            mensagem += "Data: ".concat(dataSelecionada);
+            var url = "https://wa.me/".concat(numero, "?text=").concat(encodeURIComponent(mensagem));
+            window.open(url, '_blank');
         });
-    }
+    });
+    var dropdownButtons = document.querySelectorAll('.btn-cine, .btn-restaurante');
+    dropdownButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var targetId = btn.getAttribute('data-target');
+            if (targetId)
+                toggleDropdown(targetId);
+        });
+    });
 });
