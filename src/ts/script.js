@@ -35,7 +35,7 @@ window.addEventListener('click', function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     var botaoSim = document.getElementById('btn-s');
     botaoSim === null || botaoSim === void 0 ? void 0 : botaoSim.addEventListener('click', function () {
-        window.location.href = 'choice.html';
+        window.location.href = 'choice2.html';
     });
     // Integração com WhatsApp
     var links = document.querySelectorAll('.whatsapp-link');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var dataSelecionada = (inputData === null || inputData === void 0 ? void 0 : inputData.value) || 'Data não selecionada';
             var mensagem = 'Aceito: ✔️\n';
             if (filme) {
-                mensagem += "Cineminha: \uD83D\uDCFD\uFE0F\nFilminho: ".concat(filme, "\n");
+                mensagem += "Cineminha: \uD83D\uDCFD\uFE0F \n Filminho: ".concat(filme, "\n");
             }
             else if (local) {
                 mensagem += "Local: ".concat(local, "\n");
